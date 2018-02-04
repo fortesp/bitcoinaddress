@@ -1,7 +1,7 @@
-# PyBitcoinAddress
+# pyBitcoinAddress
 Bitcoin Wallet Address Generator
 
-This is a simple Bitcon wallet address generator coded in Python.
+This is a simple Bitcon wallet address generator coded in Python 3.
 
 # Usage:
 python wallet.py
