@@ -2,6 +2,7 @@
 Bitcoin Wallet Address Generator
 
 This is a simple Bitcon wallet address generator coded in Python 3.
+It outputs a random private key hash and an uncompressed public address in base58 format, the most used.
 
 # Usage:
 python wallet.py
