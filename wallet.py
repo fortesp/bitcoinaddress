@@ -25,17 +25,18 @@ class Keys:
         def generate(self, seed=None):
 
             if(seed==None): seed = str(time.time()) + ''.join(random.choices(string.ascii_uppercase + string.digits, k=20))
-       
+
             oPk = hashlib.sha256(seed.encode())
-                      
-            # SECP256k1 - Bitcoin elliptic curve
-            oSk = ecdsa.SigningKey.from_string(oPk.digest(), curve=ecdsa.SECP256k1)
-            sk_string = oSk.to_string()
+            self.privkey = oPk.hexdigest()
             
+            # SECP256k1 - Bitcoin elliptic curve
+            oSk = ecdsa.SigningKey.from_string(oPk.digest(), curve=ecdsa.SECP256k1)                    
             oVk = oSk.get_verifying_key()
 
             hexlify = codecs.getencoder('hex')
-       
+             
+            self.pubkey = str(hexlify(b'\04' + oVk.to_string())[0].decode('utf-8'))
+          
             ripemd160 = hashlib.new('ripemd160')
             ripemd160.update(hashlib.sha256(codecs.decode(self.pubkey, "hex")).digest())
 
@@ -43,10 +44,7 @@ class Keys:
                 
             checksum = hashlib.sha256(hashlib.sha256(middle_man).digest()).digest()[:4]        
             binary_addr = middle_man + checksum
-
-            # Assign final values
-            self.privkey = oPk.hexdigest()
-            self.pubkey  = '04' + str(hexlify(oVk.to_string())[0].decode('utf-8'))
+ 
             self.pubaddr = base58.b58encode(binary_addr)            
 
         def __str__(self):
