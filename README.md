@@ -1,4 +1,4 @@
-# bitcoinaddressgen
+# Bitcoin Address Gen
 Bitcoin Wallet Address Generator
 
 This is a simple Bitcoin wallet address generator coded in Python 3.
