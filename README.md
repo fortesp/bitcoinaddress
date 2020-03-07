@@ -4,30 +4,17 @@ Bitcoin Wallet Address Generator
 This is a simple Bitcoin wallet address generator coded in Python 3.
 It generates a Private Key in different formats (hex, wif and compressed wif) and corresponding Public Addresses, raw, P2WPKH addresses starting with prefix 1, P2SH addresses starting with prefix 3 as part of Segwit soft fork and Bech32 addresses with prefix bc1 P2WPKH and P2WSH.
 
-# Install pip3 (if missing)
-Linux
-```
-    sudo apt install python3-pip
-```
-
-Mac
-```
-    brew install python3
-```
-(Brew installs python3 and pip3 together)
-
-# Install project requirements
-
+## Project requirements installation
 ```
 pip install -r requirements.txt
 ```
 
-# Usage:
+## Usage:
 ```
 python wallet.py
 ```
 
-# Output:
+## Output:
 ```
 Private Key HEX: 562997b9379008a97d7e4cbf6f19c41d4c348de96199aba44c79e3b32f1cc174
 Private Key WIF: 5JUEV9pjH4o16NRTBsaN18ehDNaqSsD66EySbT1BZsSvYQttmga
