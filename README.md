@@ -6,12 +6,13 @@ It generates a Private Key in different formats (hex, wif and compressed wif) an
 
 ## Installation
 ```
-pip install -r requirements.txt
+pip install bitcoinaddress
 ```
 
 ## Usage:
 ```
 from bitcoinaddress import Wallet
+
 wallet = Wallet()
 print(wallet)
 ```
