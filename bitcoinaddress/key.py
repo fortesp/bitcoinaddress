@@ -16,8 +16,6 @@ class Key:
         self.wif = ''
         self.wif_c = ''
 
-        self.generate(seed)
-
     def _seed(self):
         t = int(time.time())
         return str(random.getrandbits(3000) - t)

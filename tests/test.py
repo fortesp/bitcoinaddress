@@ -1,5 +1,6 @@
 import unittest
 
+from bitcoinaddress import Address, Key
 from bitcoinaddress.wallet import Wallet
 
 # TODO
@@ -9,8 +10,14 @@ class TestBicoinAddress(unittest.TestCase):
         pass
 
     def test_bitcoinaddress(self):
-        wallet = Wallet()
-        print(wallet)
+
+        key = Key()
+        keys_dict = key.generate()
+        print(keys_dict)
+
+        address = Address(key)
+        address_dict = address.generate()
+        print(address_dict)
 
     def tearDown(self) -> None:
         pass

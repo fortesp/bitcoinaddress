@@ -18,8 +18,6 @@ class Address:
         self.pubaddrbc1_P2WPKH = ''
         self.pubaddrbc1_P2WSH = ''
 
-        self.generate()
-
     def hash160(self, v):
         r = hashlib.new('ripemd160')
         r.update(hashlib.sha256(v).digest())
@@ -31,6 +29,10 @@ class Address:
         return sk.get_verifying_key()
 
     def generate(self) -> {}:
+
+        if self.privkey.hash is None:
+            self.privkey.generate()
+
         self._generate_publicaddress1()
         self._generate_publicaddress3()
         self._generate_publicaddressbc1()
