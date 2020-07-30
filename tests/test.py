@@ -1,7 +1,7 @@
 import unittest
 
-from bitcoinaddress import Address, Key
-from bitcoinaddress.wallet import Wallet
+from bitcoinaddress import Address, Key, Wallet
+
 
 # TODO
 class TestBicoinAddress(unittest.TestCase):

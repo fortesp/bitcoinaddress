@@ -15,17 +15,20 @@ class Key:
         self.hex = ''
         self.wif = ''
         self.wif_c = ''
-
-    def _seed(self):
-        t = int(time.time())
-        return str(random.getrandbits(3000) - t)
+        self.wif_testnet = ''
+        self.wif_c_testnet = ''
 
     def generate(self, seed=None):
         self._generate_raw(seed)
         self._generate_hex()
         self._generate_wif()
+        self._generate_wif_testnet()
 
-        return {'hex': self.hex, 'wif': self.wif, 'wifc': self.wif_c}
+        return {'hex': self.hex, 'wif': self.wif, 'wifc': self.wif_c, 'testnet': {'hex': self.hex, 'wif': self.wif_testnet, 'wifc': self.wif_c_testnet}}
+
+    def _seed(self):
+        t = int(time.time())
+        return str(random.getrandbits(3000) - t)
 
     def _generate_raw(self, seed=None):
         if (seed == None): seed = self._seed()
@@ -47,8 +50,22 @@ class Key:
         self.wif = base58.b58encode(d + checksum).decode('utf-8')
         self.wif_c = base58.b58encode(d + suffix + checksum_c).decode('utf-8')
 
+    def _generate_wif_testnet(self):
+        prefix = b'\xEF'
+        suffix = b'\x01'
+
+        d = prefix + self.hashdigest
+
+        checksum = doublehash256(d).digest()[:4]
+        checksum_c = doublehash256(d + suffix).digest()[:4]
+
+        self.wif_testnet = base58.b58encode(d + checksum).decode('utf-8')
+        self.wif_c_testnet = base58.b58encode(d + suffix + checksum_c).decode('utf-8')
+
     def __str__(self):
-        return """Private Key HEX: %s
-                \rPrivate Key WIF: %s\r
-                \rPrivate Key WIF compressed: %s 
-                """ % (self.hex, self.wif, self.wif_c)
+        return """Private Key HEX: %s\n
+                \rPrivate Key WIF: %s
+                \rPrivate Key WIF compressed: %s
+                \rPrivate Key WIF (TESTNET): %s
+                \rPrivate Key WIF compressed (TESTNET): %s 
+                """ % (self.hex, self.wif, self.wif_c, self.wif_testnet, self.wif_c_testnet)

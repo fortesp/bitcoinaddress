@@ -1,4 +1,5 @@
-# Bitcoin Address
+# Bitcoin Address 
+### v.0.1.0
 Bitcoin Wallet Address Generator
 
 This is a simple Bitcoin wallet address generator coded in Python 3.
@@ -20,17 +21,24 @@ print(wallet)
 
 ###### Output:
 ```
-Private Key HEX: 562997b9379008a97d7e4cbf6f19c41d4c348de96199aba44c79e3b32f1cc174
-Private Key WIF: 5JUEV9pjH4o16NRTBsaN18ehDNaqSsD66EySbT1BZsSvYQttmga
-Private Key WIF compressed: Kz7CXFwfbuk3QhYvazEFhamNVcGLqAcMU8g7y3moe5fRKZXZaj7k
+Private Key HEX: c2814c56793485f803430ef28ea93ba34e1dc74a74cead43407378350a958792
 
-Public Key: 04e7ba7ecb0fccaae6bbe1d1493a1dc2e6d266006374411af3ff82546490ffef67cd2e06d0e385b695fe2eaf436d61559837571d989b413e75d763127f628a05f3
-Public Key compressed: 03e7ba7ecb0fccaae6bbe1d1493a1dc2e6d266006374411af3ff82546490ffef67
-
-Public Address 1: 1oKgBdYNyNiW5ntjEpJwsJwRZ1Qr9cPce
-Public Address 3: 3K55C3EdCJYZWoc95Tt7CbXnUkDSaVeZrC
-Public Address bc1 (P2WPKH): bc1q363sj8rhw0uqmxurraa0rtydhp32cyuke4lfwt 
-Public Address bc1 (P2WSH): bc1qsy38c4na9fm0y5pvyhja0hscpx5my290pgwgeq5eduvdqmejkwyq0whxpw
+Private Key WIF: 5KHwxCT8Nrb3MSiQRS5h6fqmAJWrXzi9min15xSzY1EuR3EgLHT
+Private Key WIF compressed: L3joYdYKZTsFPEVkNqhhz2SDv4JmdoidiPPdNsjiwr4NLr31PkqK
+Private Key WIF (TESTNET): 934aXwGfy5fBKWDh3mybyGPioxsZhAFM7fdxAaoVsjyxC7vYTv3
+Private Key WIF compressed (TESTNET): cU6o1YYAzXZWYfy1mFWqMLwHYHcBJFpKnRY6VJCESxiNbbCpd33r 
+                
+Public Key: 04a0a7d1d00d970b0be7594b5ab12f930d8275156e2d66f92d39525a44c339aff0fb02568075a8928e9f8a865f0e9633482cf8e5b3bb27c8a7279e9afbc06f9072 
+Public Key compressed: 02a0a7d1d00d970b0be7594b5ab12f930d8275156e2d66f92d39525a44c339aff0
+ 
+Public Address 1: 1FdqdaXsPTdzHY83NLpue33S2pW1joXcWr   
+Public Address 3: 3ExX4G6qPBDbMpQH6h1Ka7g26322JQtUfd  
+Public Address bc1 P2WPKH: bc1q27qee3seastzzqgqvyrglj763sw69rymd2m3hv4ph6u7fx2g8a6skzcqer    
+Public Address bc1 P2WSH: bc1qv2m5c60h0vnjjuyefwlczla85ctjuev0q4uqkt  
+Public Address 1 (TESTNET): mv9nvdcrCV5F4ebf5uoHTxFktp6ig1jKtv   
+Public Address 3 (TESTNET): 2N6Wj812rzdiwZc2pmpdCC4fHJPEC6YyLL4  
+Public Address tb1 P2WPKH (TESTNET): tb1q27qee3seastzzqgqvyrglj763sw69rymd2m3hv4ph6u7fx2g8a6sp2w0rv    
+Public Address tb1 P2WSH (TESTNET): tb1qv2m5c60h0vnjjuyefwlczla85ctjuev02n8ndc  
 ```
 
 ###### Example 2
@@ -48,22 +56,37 @@ print(address_dict)
 
 ###### Output:
 ```
-{'hex': '060e9a032e49db4eb758d60d96c14fea64e410d87ac826cc3c133047528935f6', 
-'wif': '5HrxJNp4LHGtkWDZWPjbr3JQvAamdFxQkDAksjrWFy8QG8EWsHJ', 
-'wifc': 'KwRV5hGhi6q9R1xSUjM2oT9rZfJ3y31Zoii4ex9W94jffRrD8t4G'}
+{'hex': '669182eb2c3169e01cfc305034dc0b1df8328c274865e70d632c711ba62ec3d3', 
+'wif': '5JbTZ4zCTn1rwCfdkPWLddFgqzieGaG9Qjp3iRhf7R8gNroj4KM', 
+'wifc': 'Kzf6CYbTbBgoQEVXCWLVef1psFkoVjor7mxeyr2TDKWto7iHfXHh', 
+'testnet': {
+    'hex': '669182eb2c3169e01cfc305034dc0b1df8328c274865e70d632c711ba62ec3d3', 
+    'wif': '92N68ook415zuGAvNjQFWDoeVf5MRjoLkgfzo44AT9sj9qhLBkU', 
+    'wifc': 'cR25fTbK2FP4Zfxnav9d1yWtVV4DABuYBp786GUxiSAu3rpq6gkk'}}
 
-{'pubkey': '04f9f7a04a482885ad3348d1a02e928ca659fb2a40ece79223329fc44ef518c810f026be9f40149f31a3fb077c3b18019cd5bb837b3d923627ec5e396ed63d3ce7', 
-'pubkeyc': '03f9f7a04a482885ad3348d1a02e928ca659fb2a40ece79223329fc44ef518c810', 
-'pubaddr1': '1Hyvgn8wwVab4d2qCXMKr1dJZRXktbRPXo', 
-'pubaddr3': '3KG5NRa5GwWVqoQGvL3KC4zPqo8W33ikQT', 
-'pubaddrbc1_p2wsh': 'bc1qad8wsh8evtz5wjueyh2hy4zgt5c0ahwtl4pq793058wrercagwwqyx5mzt', 
-'pubaddrbc1_p2wpkh': 'bc1q270rv5ezzuepa0pyr0wujuuwr2qtegwgfrt78t'}
+{'pubkey': '04e61341f46b529b0fac2c5e15a67af7affceb2be7544af18d14206fff041c02c04d6ca36c97f458cfe5754ce15a8f32d4c917b5f0f5e336042ee3be77c3f58222', 
+'pubkeyc': '02e61341f46b529b0fac2c5e15a67af7affceb2be7544af18d14206fff041c02c0', 
+'pubaddr1': '1NaChZV4JJysct8QYcMKFHnQ2SNFpnBund', 
+'pubaddr3': '34QhdWUjZjv3HLyvNYgb4AR7ikAfcdzfCW', 
+'pubaddrbc1_p2wsh': 'bc1qup6umurcl7s6zw42gcxfzl346psazws74x72ty6gmlvkaxz6kv4sqsth99', 
+'pubaddrbc1_p2wpkh': 'bc1qsnwc0y43fpljyl2ep0e2gtsqa55utcj4ntzwlf', 
+'testnet': {
+    'pubkey': '04e61341f46b529b0fac2c5e15a67af7affceb2be7544af18d14206fff041c02c04d6ca36c97f458cfe5754ce15a8f32d4c917b5f0f5e336042ee3be77c3f58222', 
+    'pubkeyc': '02e61341f46b529b0fac2c5e15a67af7affceb2be7544af18d14206fff041c02c0', 
+    'pubaddr1': 'n369zca37LR8Pzc2GBKh5CzitRxxhkHDhK', 
+    'pubaddr3': '2MuxuhFQmBCRPV8cU3gJTg7QNw6NqTuUm2A', 
+    'pubaddrbc1_p2wsh': 'tb1qup6umurcl7s6zw42gcxfzl346psazws74x72ty6gmlvkaxz6kv4shcacl2', 
+    'pubaddrbc1_p2wpkh': 'tb1qsnwc0y43fpljyl2ep0e2gtsqa55utcj4edeay6'}}
+
 ```
 
 
 ## Authors
 Pedro Fortes and others who contribute.
 
+
 ## License
 This software is distributed under the terms of the MIT License. 
 See the file 'LICENSE' in the root directory of the present distribution, or http://opensource.org/licenses/MIT.
+
+Bech32 address scripts source from https://github.com/sipa/bech32/tree/master/ref/python
