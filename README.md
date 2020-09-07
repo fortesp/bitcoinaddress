@@ -33,12 +33,12 @@ Public Key compressed: 02a0a7d1d00d970b0be7594b5ab12f930d8275156e2d66f92d39525a4
  
 Public Address 1: 1FdqdaXsPTdzHY83NLpue33S2pW1joXcWr   
 Public Address 3: 3ExX4G6qPBDbMpQH6h1Ka7g26322JQtUfd  
-Public Address bc1 P2WPKH: bc1q27qee3seastzzqgqvyrglj763sw69rymd2m3hv4ph6u7fx2g8a6skzcqer    
-Public Address bc1 P2WSH: bc1qv2m5c60h0vnjjuyefwlczla85ctjuev0q4uqkt  
+Public Address bc1 P2WSH: bc1q27qee3seastzzqgqvyrglj763sw69rymd2m3hv4ph6u7fx2g8a6skzcqer    
+Public Address bc1 P2WPKH: bc1qv2m5c60h0vnjjuyefwlczla85ctjuev0q4uqkt  
 Public Address 1 (TESTNET): mv9nvdcrCV5F4ebf5uoHTxFktp6ig1jKtv   
 Public Address 3 (TESTNET): 2N6Wj812rzdiwZc2pmpdCC4fHJPEC6YyLL4  
-Public Address tb1 P2WPKH (TESTNET): tb1q27qee3seastzzqgqvyrglj763sw69rymd2m3hv4ph6u7fx2g8a6sp2w0rv    
-Public Address tb1 P2WSH (TESTNET): tb1qv2m5c60h0vnjjuyefwlczla85ctjuev02n8ndc  
+Public Address tb1 P2WSH (TESTNET): tb1q27qee3seastzzqgqvyrglj763sw69rymd2m3hv4ph6u7fx2g8a6sp2w0rv    
+Public Address tb1 P2WPKH (TESTNET): tb1qv2m5c60h0vnjjuyefwlczla85ctjuev02n8ndc  
 ```
 
 ###### Example 2
