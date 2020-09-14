@@ -10,21 +10,23 @@ from .util import doublehash256
 class Key:
 
     def __init__(self, seed=None):
-        self.hash = ''
-        self.hashdigest = ''
-        self.hex = ''
-        self.wif = ''
-        self.wif_c = ''
-        self.wif_testnet = ''
-        self.wif_c_testnet = ''
+        self.seed = seed
+        self.hash = None
+        self.hashdigest = None
+        self.hex = None
+        self.wif = None
+        self.wif_c = None
+        self.wif_testnet = None
+        self.wif_c_testnet = None
 
-    def generate(self, seed=None):
-        self._generate_raw(seed)
+    def generate(self):
+        self._generate_raw(self.seed)
         self._generate_hex()
         self._generate_wif()
         self._generate_wif_testnet()
 
-        return {'hex': self.hex, 'wif': self.wif, 'wifc': self.wif_c, 'testnet': {'hex': self.hex, 'wif': self.wif_testnet, 'wifc': self.wif_c_testnet}}
+        return {'hex': self.hex, 'wif': self.wif, 'wifc': self.wif_c,
+                'testnet': {'hex': self.hex, 'wif': self.wif_testnet, 'wifc': self.wif_c_testnet}}
 
     def _seed(self):
         t = int(time.time())

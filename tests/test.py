@@ -3,21 +3,62 @@ import unittest
 from bitcoinaddress import Address, Key, Wallet
 
 
-# TODO
+# TODO - More coverage and refactoring
 class TestBicoinAddress(unittest.TestCase):
 
-    def setUp(self) -> None:
-        pass
+    def testKey(self):
+        # when
+        key1 = Key()
+        keys_dict_1 = key1.generate()
 
-    def test_bitcoinaddress(self):
+        key2 = Key('myseed')
+        keys_dict_2 = key2.generate()
 
-        key = Key()
-        keys_dict = key.generate()
-        print(keys_dict)
+        key3 = Key('myseed')
+        keys_dict_3 = key3.generate()
 
-        address = Address(key)
+        key4 = Key('myseed2')
+        keys_dict_4 = key4.generate()
+
+        # then
+        self.assertIn('hex', keys_dict_1)
+        self.assertEqual(len(keys_dict_1['hex']), 64)
+        self.assertIn('wif', keys_dict_1)
+        self.assertEqual(len(keys_dict_1['wif']), 51)
+        self.assertIn('wifc', keys_dict_1)
+        self.assertEqual(len(keys_dict_1['wifc']), 52)
+        self.assertIn('testnet', keys_dict_1)
+
+        self.assertTrue(keys_dict_1 != keys_dict_2)
+        self.assertFalse(keys_dict_2 != keys_dict_3)
+        self.assertTrue(keys_dict_3 != keys_dict_4)
+
+    def testAddress(self):
+        # when
+        address = Address(Key())
         address_dict = address.generate()
-        print(address_dict)
 
-    def tearDown(self) -> None:
-        pass
+        # then
+        self.assertIn('pubkey', address_dict)
+        self.assertEqual(len(address_dict['pubkey']), 130)
+        self.assertIn('pubkeyc', address_dict)
+        self.assertEqual(len(address_dict['pubkeyc']), 66)
+        self.assertIn('pubaddr1', address_dict)
+        self.assertEqual(len(address_dict['pubaddr1']), 34)
+        self.assertIn('pubaddr3', address_dict)
+        self.assertEqual(len(address_dict['pubaddr3']), 34)
+        self.assertIn('pubaddrbc1_p2wsh', address_dict)
+        self.assertEqual(len(address_dict['pubaddrbc1_p2wsh']), 62)
+        self.assertIn('pubaddrbc1_p2wpkh', address_dict)
+        self.assertEqual(len(address_dict['pubaddrbc1_p2wpkh']), 42)
+        self.assertIn('testnet', address_dict)
+
+    def testKeyAddress(self):
+        # when
+        key_1 = Key('myseed')
+        key_2 = Key('myseed')
+
+        address_1 = Address(key_1)
+        address_2 = Address(key_2)
+
+        self.assertEquals(address_1.pubkey, address_2.pubkey)

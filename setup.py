@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="bitcoinaddress",
-    version="0.1.0",
+    version="0.1.1",
     author="Pedro Fortes",
     author_email="pedro.daniel.g@gmail.com",
     description="A simple Bitcoin address generator",

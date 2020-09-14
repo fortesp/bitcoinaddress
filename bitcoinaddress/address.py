@@ -11,17 +11,17 @@ class Address:
 
     def __init__(self, key: Key):
         self.privkey = key
-        self.pubkey = ''
-        self.pubkey_c = ''
-        self.pubaddr1 = ''
-        self.pubaddr3 = ''
-        self.pubaddrbc1_P2WPKH = ''
-        self.pubaddrbc1_P2WSH = ''
+        self.pubkey = None
+        self.pubkey_c = None
+        self.pubaddr1 = None
+        self.pubaddr3 = None
+        self.pubaddrbc1_P2WPKH = None
+        self.pubaddrbc1_P2WSH = None
 
-        self.pubaddr1_testnet = ''
-        self.pubaddr3_testnet = ''
-        self.pubaddrbc1_P2WPKH_testnet = ''
-        self.pubaddrbc1_P2WSH_testnet = ''
+        self.pubaddr1_testnet = None
+        self.pubaddr3_testnet = None
+        self.pubaddrbc1_P2WPKH_testnet = None
+        self.pubaddrbc1_P2WSH_testnet = None
 
     def hash160(self, v):
         r = hashlib.new('ripemd160')

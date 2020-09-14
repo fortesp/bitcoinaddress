@@ -1,5 +1,5 @@
 # Bitcoin Address 
-### v.0.1.0
+### v.0.1.1
 Bitcoin Wallet Address Generator
 
 This is a simple Bitcoin wallet address generator coded in Python 3.
