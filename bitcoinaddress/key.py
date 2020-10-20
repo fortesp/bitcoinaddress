@@ -1,10 +1,13 @@
-import hashlib
-import random
-import time
+#  Bitcoin Address  v0.1
+#  Copyright (c) 2020 - https://github.com/fortesp/bitcoinaddress
+#  This software is distributed under the terms of the MIT License.
+#  See the file 'LICENSE' in the root directory of the present distribution,
+#  or http://opensource.org/licenses/MIT.
 
+import hashlib
 import base58
 
-from .util import doublehash256
+from .util import doublehash256, randomseed
 
 
 class Key:
@@ -28,12 +31,8 @@ class Key:
         return {'hex': self.hex, 'wif': self.wif, 'wifc': self.wif_c,
                 'testnet': {'hex': self.hex, 'wif': self.wif_testnet, 'wifc': self.wif_c_testnet}}
 
-    def _seed(self):
-        t = int(time.time())
-        return str(random.getrandbits(3000) - t)
-
     def _generate_raw(self, seed=None):
-        if (seed == None): seed = self._seed()
+        if seed is None: seed = randomseed()
         self.hash = hashlib.sha256(seed.encode())
         self.hashdigest = self.hash.digest()
 
@@ -44,25 +43,25 @@ class Key:
         prefix = b'\x80'
         suffix = b'\x01'
 
-        d = prefix + self.hashdigest
+        _digest = prefix + self.hashdigest
 
-        checksum = doublehash256(d).digest()[:4]
-        checksum_c = doublehash256(d + suffix).digest()[:4]
+        checksum = doublehash256(_digest).digest()[:4]
+        checksum_c = doublehash256(_digest + suffix).digest()[:4]
 
-        self.wif = base58.b58encode(d + checksum).decode('utf-8')
-        self.wif_c = base58.b58encode(d + suffix + checksum_c).decode('utf-8')
+        self.wif = base58.b58encode(_digest + checksum).decode('utf-8')
+        self.wif_c = base58.b58encode(_digest + suffix + checksum_c).decode('utf-8')
 
     def _generate_wif_testnet(self):
         prefix = b'\xEF'
         suffix = b'\x01'
 
-        d = prefix + self.hashdigest
+        _digest = prefix + self.hashdigest
 
-        checksum = doublehash256(d).digest()[:4]
-        checksum_c = doublehash256(d + suffix).digest()[:4]
+        checksum = doublehash256(_digest).digest()[:4]
+        checksum_c = doublehash256(_digest + suffix).digest()[:4]
 
-        self.wif_testnet = base58.b58encode(d + checksum).decode('utf-8')
-        self.wif_c_testnet = base58.b58encode(d + suffix + checksum_c).decode('utf-8')
+        self.wif_testnet = base58.b58encode(_digest + checksum).decode('utf-8')
+        self.wif_c_testnet = base58.b58encode(_digest + suffix + checksum_c).decode('utf-8')
 
     def __str__(self):
         return """Private Key HEX: %s\n

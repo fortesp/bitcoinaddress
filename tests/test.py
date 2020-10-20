@@ -1,3 +1,9 @@
+#  Bitcoin Address  v0.1
+#  Copyright (c) 2020 - https://github.com/fortesp/bitcoinaddress
+#  This software is distributed under the terms of the MIT License.
+#  See the file 'LICENSE' in the root directory of the present distribution,
+#  or http://opensource.org/licenses/MIT.
+
 import unittest
 
 from bitcoinaddress import Address, Key, Wallet
@@ -61,4 +67,4 @@ class TestBicoinAddress(unittest.TestCase):
         address_1 = Address(key_1)
         address_2 = Address(key_2)
 
-        self.assertEquals(address_1.pubkey, address_2.pubkey)
+        self.assertEqual(address_1.pubkey, address_2.pubkey)
