@@ -23,8 +23,7 @@ install:
 	pip3 install bitcoinaddress
 
 deploy:
-	clean
-	validate
-	test
+	make validate
+	make test
 	python3 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
