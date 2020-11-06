@@ -7,7 +7,8 @@
 import hashlib
 import base58
 
-from .util import doublehash256, randomseed
+from . import Seed
+from .util import doublehash256
 
 
 class Key:
@@ -23,7 +24,7 @@ class Key:
         self.wif_c_testnet = None
 
     def generate(self):
-        self._generate_raw(self.seed)
+        self._generate_raw()
         self._generate_hex()
         self._generate_wif()
         self._generate_wif_testnet()
@@ -31,9 +32,14 @@ class Key:
         return {'hex': self.hex, 'wif': self.wif, 'wifc': self.wif_c,
                 'testnet': {'hex': self.hex, 'wif': self.wif_testnet, 'wifc': self.wif_c_testnet}}
 
-    def _generate_raw(self, seed=None):
-        if seed is None: seed = randomseed()
-        self.hash = hashlib.sha256(seed.encode())
+    def _generate_raw(self):
+        if self.seed is None:
+            self.seed = Seed.random()
+        else:
+            if isinstance(self.seed,  Seed):
+                self.seed = str(self.seed.data)
+
+        self.hash = hashlib.sha256(self.seed.encode())
         self.hashdigest = self.hash.digest()
 
     def _generate_hex(self):

@@ -4,6 +4,7 @@
 #  See the file 'LICENSE' in the root directory of the present distribution,
 #  or http://opensource.org/licenses/MIT.
 
+from .seed import Seed
 from .key import Key
 from .address import Address
 from .wallet import Wallet

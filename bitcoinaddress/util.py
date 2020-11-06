@@ -5,8 +5,6 @@
 #  or http://opensource.org/licenses/MIT.
 
 import hashlib
-import time
-import random
 import ecdsa
 
 
@@ -24,8 +22,3 @@ def ecdsa_secp256k1(digest):
     # SECP256k1 - Bitcoin elliptic curve
     sk = ecdsa.SigningKey.from_string(digest, curve=ecdsa.SECP256k1)
     return sk.get_verifying_key()
-
-
-def randomseed():
-    current_time = int(time.time())
-    return str(random.getrandbits(3000) - current_time)

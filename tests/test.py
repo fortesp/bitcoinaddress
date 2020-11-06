@@ -5,8 +5,7 @@
 #  or http://opensource.org/licenses/MIT.
 
 import unittest
-
-from bitcoinaddress import Address, Key, Wallet
+from bitcoinaddress import Address, Key, Seed
 
 
 # TODO - More coverage and refactoring
@@ -67,4 +66,22 @@ class TestBicoinAddress(unittest.TestCase):
         address_1 = Address(key_1)
         address_2 = Address(key_2)
 
+        # then
         self.assertEqual(address_1.pubkey, address_2.pubkey)
+
+    def testKeyAddressSeed(self):
+        # when
+        seed_1 = Seed('myseed')
+        seed_2 = Seed('myseed')
+        key_1 = Key(seed_1)
+        key_2 = Key(seed_2)
+
+        address_1 = Address(key_1)
+        address_2 = Address(key_2)
+        
+        # then
+        self.assertEqual(address_1.pubkey, address_2.pubkey)
+
+
+if __name__ == "__main__":
+    unittest.main()
