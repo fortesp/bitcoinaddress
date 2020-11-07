@@ -12,7 +12,7 @@ validate:
 	pylint *.py
 
 test:
-	python3 -m unittest tests/test.py
+	python3 -m unittest tests/*.py
 
 build:
 	python3 setup.py sdist bdist_wheel
