@@ -8,7 +8,8 @@ import binascii
 import hashlib
 import base58
 
-from . import Key, segwit_addr
+from bitcoinaddress.key import Key
+from . import segwit_addr
 from .util import doublehash256, hash160, ecdsa_secp256k1
 
 
@@ -30,7 +31,7 @@ class Address:
 
     def generate(self) -> {}:
 
-        if self.privkey.hash is None:
+        if self.privkey.digest is None:
             self.privkey.generate()
 
         self._generate_publicaddress1()
@@ -98,9 +99,9 @@ class Address:
         self.pubaddrbc1_P2WSH_testnet = str(segwit_addr.encode('tb', 0x00, redeem_script_P2WSH))
 
     def __generate_uncompressed_pubkey(self, prefix_a, prefix_b):
-        digest = self.privkey.hash.digest()
+        _digest = self.privkey.digest
 
-        _p = prefix_a + ecdsa_secp256k1(digest).to_string()  # 1 + 32 bytes + 32 bytes
+        _p = prefix_a + ecdsa_secp256k1(_digest).to_string()  # 1 + 32 bytes + 32 bytes
         self.pubkey = str(binascii.hexlify(_p).decode('utf-8'))
 
         m = prefix_b + hash160(_p).digest()
@@ -111,9 +112,9 @@ class Address:
     def __generate_compressed_pubkey(self, prefix_even, prefix_odd):
         prefix_a = prefix_odd
 
-        digest = self.privkey.hash.digest()
+        _digest = self.privkey.digest
 
-        ecdsa_digest = ecdsa_secp256k1(digest).to_string()
+        ecdsa_digest = ecdsa_secp256k1(_digest).to_string()
 
         x_coord = ecdsa_digest[:int(len(ecdsa_digest) / 2)]
         y_coord = ecdsa_digest[int(len(ecdsa_digest) / 2):]
