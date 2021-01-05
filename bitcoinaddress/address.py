@@ -3,15 +3,13 @@
 #  This software is distributed under the terms of the MIT License.
 #  See the file 'LICENSE' in the root directory of the present distribution,
 #  or http://opensource.org/licenses/MIT.
-from abc import ABC
-
-import binascii
 import hashlib
+from abc import ABC
 import base58
-
+import binascii
 from bitcoinaddress.key.key import Key
 from . import segwit_addr
-from .util import doublehash256, hash160, ecdsa_secp256k1, checksum
+from .util import hash160, ecdsa_secp256k1, checksum
 
 
 class Address:
