@@ -90,7 +90,7 @@ class Address:
         self.pubaddrbc1_P2WSH = str(segwit_addr.encode('bc', 0x00, redeem_script_P2WSH))
 
     def _generate_publicaddress_bech32_testnet(self):
-        _p = self.__generate_compressed_pubkey(b'\x02', b'\x14')
+        _p = self.__generate_compressed_pubkey(b'\x02', b'\x03')
 
         redeem_script_P2WPKH = hash160(_p).digest()  # 20 bytes
         redeem_script_P2WSH = hashlib.sha256(_p).digest()
