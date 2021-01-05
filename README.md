@@ -1,8 +1,11 @@
 # Bitcoin Address
 
-### v.0.1.4
+[![](https://img.shields.io/github/v/release/fortesp/bitcoinaddress)](https://github.com/fortesp/bitcoinaddress)
+[![](https://img.shields.io/github/stars/fortesp/bitcoinaddress.svg)](https://github.com/fortesp/bitcoinaddress)
+[![](https://img.shields.io/github/issues/fortesp/bitcoinaddress)](https://github.com/fortesp/bitcoinaddress)
+[![](https://img.shields.io/github/license/fortesp/bitcoinaddress?style)](https://github.com/fortesp/bitcoinaddress)
 
-Bitcoin Wallet Address Generator
+### Bitcoin Wallet Address Generator
 
 This is a simple Bitcoin non-deterministic wallet address generator coded in Python 3. It generates a Private Key in different
 formats (hex, wif and compressed wif) and corresponding Public Addresses, raw, P2WPKH addresses starting with prefix 1, P2SH addresses
