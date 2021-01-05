@@ -5,5 +5,6 @@
 #  or http://opensource.org/licenses/MIT.
 
 from .key.key import Key
+from .key.seed import Seed
 from .address import Address
 from .wallet import Wallet

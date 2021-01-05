@@ -5,29 +5,30 @@
 #  or http://opensource.org/licenses/MIT.
 
 import time
-from random import getrandbits
-from mnemonic import Mnemonic
+import os
+from random import randrange
 
 
 class Seed:
 
-    def __init__(self, data=None, mnemonic=False):
-        self.data = data
-        self.mnemonic = mnemonic
+    def __init__(self, entropy=None):
+        self.entropy = entropy
+        if self.entropy is None:
+            self.generate()
 
     def generate(self):
-        if self.mnemonic:  # TODO
-            m = Mnemonic("english")
-            if self.data is None:
-                self.data = m.generate(strength=256)
-        else:
-            if self.data is None:
-                self.data = Seed.random()
+        self.entropy = Seed.random()
+
+    @staticmethod
+    def of(entropy=None):
+        return Seed(entropy)
 
     @staticmethod
     def random():
-        current_time = int(time.time())
-        return str(getrandbits(30000) - current_time)
+        # from bitcoin project
+        return str(os.urandom(32).hex()) \
+               + str(randrange(2 ** 256)) \
+               + str(int(time.time() * 1000000))
 
     def __str__(self):
-        return self.data
+        return self.entropy

@@ -32,6 +32,7 @@ def segwit_scriptpubkey(witver, witprog):
     """Construct a Segwit scriptPubKey for a given witness program."""
     return bytes([witver + 0x50 if witver else 0, len(witprog)] + witprog)
 
+
 VALID_CHECKSUM = [
     "A12UEL5L",
     "an83characterlonghumanreadablepartthatcontainsthenumber1andtheexcludedcharactersbio1tt5tgs",
@@ -49,7 +50,7 @@ INVALID_CHECKSUM = [
     "x1b4n0q5v",
     "li1dgmt3",
     "de1lg7wt\xff"
-    ]
+]
 
 VALID_ADDRESS = [
     ["BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4", "0014751e76e8199196d454941c45d1b3a323f1433bd6"],
@@ -84,6 +85,7 @@ INVALID_ADDRESS_ENC = [
     ("bc", 16, 41),
 ]
 
+
 class TestSegwitAddress(unittest.TestCase):
     """Unit test class for segwit addressess."""
 
@@ -93,7 +95,7 @@ class TestSegwitAddress(unittest.TestCase):
             hrp, _ = segwit_addr.bech32_decode(test)
             self.assertIsNotNone(hrp)
             pos = test.rfind('1')
-            test = test[:pos+1] + chr(ord(test[pos + 1]) ^ 1) + test[pos+2:]
+            test = test[:pos + 1] + chr(ord(test[pos + 1]) ^ 1) + test[pos + 2:]
             hrp, _ = segwit_addr.bech32_decode(test)
             self.assertIsNone(hrp)
 
@@ -120,16 +122,20 @@ class TestSegwitAddress(unittest.TestCase):
     def test_invalid_address(self):
         """Test whether invalid addresses fail to decode."""
         for test in INVALID_ADDRESS:
-            witver, _ = segwit_addr.decode("bc", test)
-            self.assertIsNone(witver)
-            witver, _ = segwit_addr.decode("tb", test)
-            self.assertIsNone(witver)
+            self.assert_invalid_address(test)
+
+    def assert_invalid_address(self, address):
+        witver, _ = segwit_addr.decode("bc", address)
+        self.assertIsNone(witver)
+        witver, _ = segwit_addr.decode("tb", address)
+        self.assertIsNone(witver)
 
     def test_invalid_address_enc(self):
         """Test whether address encoding fails on invalid input."""
         for hrp, version, length in INVALID_ADDRESS_ENC:
             code = segwit_addr.encode(hrp, version, [0] * length)
             self.assertIsNone(code)
+
 
 if __name__ == "__main__":
     unittest.main()

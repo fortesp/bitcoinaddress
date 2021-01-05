@@ -5,92 +5,129 @@
 #  or http://opensource.org/licenses/MIT.
 
 import hashlib
+from abc import ABC
 import base58
 from binascii import hexlify, unhexlify
-from .seed import Seed
-from bitcoinaddress.util import doublehash256
+from bitcoinaddress.key.seed import Seed
+from bitcoinaddress.util import checksum
 
 
 class Key:
 
-    CHECKSUM_SIZE = 4
+    class Net(ABC):
+        def __init__(self):
+            self.wif = None
+            self.wifc = None
 
-    def __init__(self, seed=None):
-        self.seed = seed
+    class MainNet(Net):
+        PREFIX = b'\x80'
+        SUFFIX = b'\x01'
+
+        def __init__(self, instance):
+            self.instance = instance
+
+        def generate_wif(self):
+            self.wif = self.instance._generate_wif(Key.MainNet.PREFIX)
+
+        def generate_wif_compressed(self):
+            self.wifc = self.instance._generate_wif_compressed(Key.MainNet.PREFIX, Key.MainNet.SUFFIX)
+
+    class TestNet(Net):
+        PREFIX = b'\xEF'
+        SUFFIX = b'\x01'
+
+        def __init__(self, instance):
+            self.instance = instance
+
+        def generate_wif(self):
+            self.wif = self.instance._generate_wif(Key.TestNet.PREFIX)
+
+        def generate_wif_compressed(self):
+            self.wifc = self.instance._generate_wif_compressed(Key.TestNet.PREFIX, Key.TestNet.SUFFIX)
+
+    def __init__(self):
+        self.seed = None
         self.digest = None
         self.hex = None
-        self.wif = None
-        self.wif_c = None
-        self.wif_testnet = None
-        self.wif_c_testnet = None
+        self.mainnet = Key.MainNet(self)
+        self.testnet = Key.TestNet(self)
 
-    def generate_from_hex(self, hex):
-        self.digest = unhexlify(hex)
+    @staticmethod
+    def of(obj):
+        key = Key()
+        if isinstance(obj, Seed):
+            key._from_seed(obj)
+        else:
+            try:
+                if len(obj) == 64:
+                    key._from_hex(obj)
+                    return key
+                if len(obj) == 51:
+                    key._from_wif(obj)
+                    return key
+                if len(obj) == 52:
+                    pass  # TODO
+            except:
+                raise Exception("Unsupported format.")
 
-        self._generate_hex()
-        self._generate_wif()
-        self._generate_wif_testnet()
-        return self.__return()
+        return key
 
-    def generate_from_wif(self, wif):
-        self.digest = self.__wif_to_digest(wif)
-
-        self._generate_hex()
-        self._generate_wif()
-        self._generate_wif_testnet()
-        return self.__return()
-
-    def generate(self):
+    def _from_seed(self, seed: Seed):
+        self.seed = seed
         self._generate_digest()
         self._generate_hex()
-        self._generate_wif()
-        self._generate_wif_testnet()
-        return self.__return()
+        self.mainnet.generate_wif()
+        self.mainnet.generate_wif_compressed()
+        self.testnet.generate_wif()
+        self.testnet.generate_wif_compressed()
+
+    def _from_hex(self, hex: str):
+        self.hex = hex
+        self.digest = unhexlify(hex)
+        self.mainnet.generate_wif()
+        self.mainnet.generate_wif_compressed()
+        self.testnet.generate_wif()
+        self.testnet.generate_wif_compressed()
+
+    def _from_wif(self, wif: str):
+        checksum_size = 4
+        self.digest = base58.b58decode(wif)[1:-checksum_size]
+        self._generate_hex()
+        self.mainnet.generate_wif()
+        self.mainnet.generate_wif_compressed()
+        self.testnet.generate_wif()
+        self.testnet.generate_wif_compressed()
 
     def _generate_digest(self):
-        if self.seed is None:
-            self.seed = Seed.random()
-        else:
-            if isinstance(self.seed, Seed):
-                self.seed = str(self.seed.data)
-
-        hash = hashlib.sha256(self.seed.encode())
+        entropy = str(self.seed.entropy)
+        hash = hashlib.sha256(entropy.encode())
         self.digest = hash.digest()
 
     def _generate_hex(self):
         self.hex = hexlify(self.digest).decode()
 
-    def _generate_wif(self):
-        prefix = b'\x80'
-        suffix = b'\x01'
-        self.wif, self.wif_c = self.__generate_wif(prefix, suffix)
+    def _generate_wif(self, prefix):
+        digest = prefix + self.digest
+        c = checksum(digest)
+        return base58.b58encode(digest + c).decode('utf-8')
 
-    def _generate_wif_testnet(self):
-        prefix = b'\xEF'
-        suffix = b'\x01'
-        self.wif_testnet, self.wif_c_testnet = self.__generate_wif(prefix, suffix)
+    def _generate_wif_compressed(self, prefix, suffix):
+        digest = prefix + self.digest
+        c = checksum(digest + suffix)
+        return base58.b58encode(digest + suffix + c).decode('utf-8')
 
-    def __generate_wif(self, prefix, suffix):
-        _digest = prefix + self.digest
+    def __str__(self, testnet=False):
+        if testnet:
+            params = (self.hex,
+                      self.testnet.wif,
+                      self.testnet.wifc)
+        else:
+            params = (self.hex,
+                      self.mainnet.wif,
+                      self.mainnet.wifc)
 
-        checksum = doublehash256(_digest).digest()[:Key.CHECKSUM_SIZE]
-        checksum_c = doublehash256(_digest + suffix).digest()[:Key.CHECKSUM_SIZE]
-
-        wif = base58.b58encode(_digest + checksum).decode('utf-8')
-        wif_c = base58.b58encode(_digest + suffix + checksum_c).decode('utf-8')
-        return wif, wif_c
-
-    def __wif_to_digest(self, wif):
-        return base58.b58decode(wif)[1:-Key.CHECKSUM_SIZE]
-
-    def __return(self):
-        return {'hex': self.hex, 'wif': self.wif, 'wifc': self.wif_c,
-                'testnet': {'hex': self.hex, 'wif': self.wif_testnet, 'wifc': self.wif_c_testnet}}
-
-    def __str__(self):
-        return """Private Key HEX: %s\n
-                \rPrivate Key WIF: %s
-                \rPrivate Key WIF compressed: %s
-                \rPrivate Key WIF (TESTNET): %s
-                \rPrivate Key WIF compressed (TESTNET): %s 
-                """ % (self.hex, self.wif, self.wif_c, self.wif_testnet, self.wif_c_testnet)
+        return """
+              \rPrivate Key HEX: %s
+              \rPrivate Key WIF: %s
+              \rPrivate Key WIF compressed: %s 
+            """ % (params)

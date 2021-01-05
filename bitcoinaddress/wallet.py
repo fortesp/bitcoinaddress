@@ -4,18 +4,22 @@
 #  See the file 'LICENSE' in the root directory of the present distribution,
 #  or http://opensource.org/licenses/MIT.
 
-from . import Address
-from . import Key
+from bitcoinaddress.key.key import Key
+from bitcoinaddress import Address, Seed
 
 
 class Wallet:
 
-    def __init__(self, seed=None):
-        self.key = Key(seed)
-        self.address = Address(self.key)
-
-        self.key.generate()
-        self.address.generate()
+    def __init__(self, hash_or_seed=None, testnet=False):
+        self.key = Key.of(hash_or_seed)
+        self.address = Address.of(self.key)
+        self.testnet = testnet
 
     def __str__(self):
-        return """%s\n%s""" % (self.key, self.address)
+        return """%s\n%s""" % (self.key.__str__(self.testnet),
+                               self.address.__str__(self.testnet))
+
+
+if __name__ == "__main__":
+    wallet = Wallet(Seed())
+    print(wallet)
