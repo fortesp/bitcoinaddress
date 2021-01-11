@@ -156,16 +156,16 @@ class Address:
                       self.testnet.pubaddr1,
                       self.testnet.pubaddr1c,
                       self.testnet.pubaddr3,
-                      self.testnet.pubaddrtb1_P2WSH,
-                      self.testnet.pubaddrtb1_P2WPKH)
+                      self.testnet.pubaddrtb1_P2WPKH,
+                      self.testnet.pubaddrtb1_P2WSH)
         else:
             params = (self.pubkey,
                       self.pubkeyc,
                       self.mainnet.pubaddr1,
                       self.mainnet.pubaddr1c,
                       self.mainnet.pubaddr3,
-                      self.mainnet.pubaddrbc1_P2WSH,
-                      self.mainnet.pubaddrbc1_P2WPKH)
+                      self.mainnet.pubaddrbc1_P2WPKH,
+                      self.mainnet.pubaddrbc1_P2WSH)
 
         return """Public Key: %s 
                       \rPublic Key compressed: %s\n

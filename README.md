@@ -41,8 +41,8 @@ Public Key compressed: 02c5389a31ce6149c28ba20d14db8540b2319e5a65000a2919fbf7a62
 Public Address 1: 1Bu6YxH64nfvhdDsYNEP8PftoBMqgusdPS   
 Public Address 1 compressed: 18i5PtPisxbGiGGEviW7HPcnfNPmcsscwH   
 Public Address 3: 38dRrGx5YbrnRWuWcJv5i2XHjYUnHE2wvv  
-Public Address bc1 P2WPKH: bc1qdveuf0egtfdnd2fnsp0lzfukn2e58czf8323ky6xt8ydew4ecfcqv3ettx    
-Public Address bc1 P2WSH: bc1q2jxe5azr6zmhk3258av7ul6cqtu4eu4mps8f4p  
+Public Address bc1 P2WPKH: bc1q2jxe5azr6zmhk3258av7ul6cqtu4eu4mps8f4p    
+Public Address bc1 P2WSH: bc1qdveuf0egtfdnd2fnsp0lzfukn2e58czf8323ky6xt8ydew4ecfcqv3ettx  
 ```
 
 ###### Example 2 - Testnet
@@ -67,8 +67,8 @@ Public Key compressed: 02f7a01e30388dea9673db8cdb48b985441db785382efbcecc05abac0
 Public Address 1: mwdHSyBBHMbcy8rogvzssvDrGyffRo3amQ   
 Public Address 1 compressed: n4VzeGfAyZGR7xCXiKmABvnKXojTFJrmKH   
 Public Address 3: 2MtJ3jPSD2AYgbF25fq9cm1aUCPhSmWUMcJ  
-Public Address bc1 P2WPKH: tb1qp53qkcsth8ffuvr00cnlg5hde03aszzeq7y0layklhd4nwkxzejs99tlh3    
-Public Address bc1 P2WSH: tb1qlsw8qqe2aa2avzn9t9nsfjy8kwwgarwcfvfqlh
+Public Address bc1 P2WPKH: tb1qlsw8qqe2aa2avzn9t9nsfjy8kwwgarwcfvfqlh    
+Public Address bc1 P2WSH: tb1qp53qkcsth8ffuvr00cnlg5hde03aszzeq7y0layklhd4nwkxzejs99tlh3
 ```
 
 ###### Example 3 - Import Private Key
@@ -93,8 +93,8 @@ Public Key compressed: 02c5389a31ce6149c28ba20d14db8540b2319e5a65000a2919fbf7a62
 Public Address 1: 1Bu6YxH64nfvhdDsYNEP8PftoBMqgusdPS   
 Public Address 1 compressed: 18i5PtPisxbGiGGEviW7HPcnfNPmcsscwH   
 Public Address 3: 38dRrGx5YbrnRWuWcJv5i2XHjYUnHE2wvv  
-Public Address bc1 P2WPKH: bc1qdveuf0egtfdnd2fnsp0lzfukn2e58czf8323ky6xt8ydew4ecfcqv3ettx    
-Public Address bc1 P2WSH: bc1q2jxe5azr6zmhk3258av7ul6cqtu4eu4mps8f4p
+Public Address bc1 P2WPKH: bc1q2jxe5azr6zmhk3258av7ul6cqtu4eu4mps8f4p    
+Public Address bc1 P2WSH: bc1qdveuf0egtfdnd2fnsp0lzfukn2e58czf8323ky6xt8ydew4ecfcqv3ettx
 ```
 
 ###### Example 4 - Check attributes
