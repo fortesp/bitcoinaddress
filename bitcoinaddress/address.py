@@ -167,11 +167,11 @@ class Address:
                       self.mainnet.pubaddrbc1_P2WPKH,
                       self.mainnet.pubaddrbc1_P2WSH)
 
-        return """Public Key: %s 
-                      \rPublic Key compressed: %s\n
-                      \rPublic Address 1: %s   
-                      \rPublic Address 1 compressed: %s   
-                      \rPublic Address 3: %s  
-                      \rPublic Address bc1 P2WPKH: %s    
-                      \rPublic Address bc1 P2WSH: %s  
-                    """ % (params)
+        return """
+            \rPublic Key                  : %s
+            \rPublic Key compressed       : %s\n
+            \rPublic Address 1            : %s
+            \rPublic Address 1 compressed : %s
+            \rPublic Address 3            : %s
+            \rPublic Address bc1 P2WPKH   : %s
+            \rPublic Address bc1 P2WSH    : %s\n""" % (params)
