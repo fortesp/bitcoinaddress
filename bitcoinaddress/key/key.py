@@ -127,7 +127,6 @@ class Key:
                       self.mainnet.wifc)
 
         return """
-              \rPrivate Key HEX: %s
-              \rPrivate Key WIF: %s
-              \rPrivate Key WIF compressed: %s 
-            """ % (params)
+            \rPrivate Key HEX             : %s
+            \rPrivate Key WIF             : %s
+            \rPrivate Key WIF compressed  : %s\n""" % (params)
