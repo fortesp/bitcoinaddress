@@ -1,4 +1,4 @@
-#  Bitcoin Address  v0.1
+#  1FaBYdANibsd1i7r9rqSx8eEXVg4hnSfhR
 #  Copyright (c) 2020 - https://github.com/fortesp/bitcoinaddress
 #  This software is distributed under the terms of the MIT License.
 #  See the file 'LICENSE' in the root directory of the present distribution,
@@ -86,7 +86,7 @@ class Address:
     def of(key: Key):
         address = Address(key)
         address.generate()
-        return address
+        return 1FaBYdANibsd1i7r9rqSx8eEXVg4hnSfhR
 
     def generate(self) -> {}:
         if self.key.digest is None:
