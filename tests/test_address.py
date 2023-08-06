@@ -18,15 +18,15 @@ class TestAddress(unittest.TestCase):
         self.assertEqual(address.mainnet.pubaddr1c, "1D7XaU5PbsPxfZeYBcGGyMEqiVvPhtFMUF")
         self.assertEqual(address.mainnet.pubaddr3, "34QhdWUjZjv3HLyvNYgb4AR7ikAfcdzfCW")
         self.assertEqual(address.mainnet.pubaddrbc1_P2WSH,
-                         "bc1qup6umurcl7s6zw42gcxfzl346psazws74x72ty6gmlvkaxz6kv4sqsth99")
-        self.assertEqual(address.mainnet.pubaddrbc1_P2WPKH, "bc1qsnwc0y43fpljyl2ep0e2gtsqa55utcj4ntzwlf")
+                         "bc1q6gmqnd9x8q40gusftcxw84sjmdszcp3hv0ur3k7aufvjwzw5y77sl2kknp")
+        self.assertEqual(address.mainnet.pubaddrbc1_P2WPKH, "bc1qaj3zyc83azvukfr5kyltf3guyzca44lhzgq6la")
 
         self.assertEqual(address.testnet.pubaddr1, "n369zca37LR8Pzc2GBKh5CzitRxxhkHDhK")
         self.assertEqual(address.testnet.pubaddr1c, "msdUsXANQtqDSg89uBEeoGTAaVX6bWK3dW")
         self.assertEqual(address.testnet.pubaddr3, "2MuxuhFQmBCRPV8cU3gJTg7QNw6NqTuUm2A")
         self.assertEqual(address.testnet.pubaddrtb1_P2WSH,
-                         "tb1qup6umurcl7s6zw42gcxfzl346psazws74x72ty6gmlvkaxz6kv4shcacl2")
-        self.assertEqual(address.testnet.pubaddrtb1_P2WPKH, "tb1qsnwc0y43fpljyl2ep0e2gtsqa55utcj4edeay6")
+                         "tb1q6gmqnd9x8q40gusftcxw84sjmdszcp3hv0ur3k7aufvjwzw5y77sgzqefw")
+        self.assertEqual(address.testnet.pubaddrtb1_P2WPKH, "tb1qaj3zyc83azvukfr5kyltf3guyzca44lhgwmfyw")
 
     def testFromRandomSeed(self):
         # when

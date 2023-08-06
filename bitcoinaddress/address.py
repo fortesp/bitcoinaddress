@@ -45,7 +45,8 @@ class Address:
             self.pubaddr3 = self.instance._generate_publicaddress3(Address.MainNet.SEGWIT_PREFIX)
 
         def generate_publicaddress_bc1_P2WPKH(self):
-            self.pubaddrbc1_P2WPKH = self.instance._generate_publicaddress_bech32_P2WPKH(Address.MainNet.BECH32_PREFIX)
+            self.pubaddrbc1_P2WPKH = self.instance._generate_publicaddress_bech32_P2WPKH(Address.MainNet.BECH32_PREFIX, 
+                                                                                         Address.MainNet.PREFIX_B)
 
         def generate_publicaddress_bc1_P2WSH(self):
             self.pubaddrbc1_P2WSH = self.instance._generate_publicaddress_bech32_P2WSH(Address.MainNet.BECH32_PREFIX)
@@ -70,7 +71,8 @@ class Address:
             self.pubaddr3 = self.instance._generate_publicaddress3(Address.TestNet.SEGWIT_PREFIX)
 
         def generate_publicaddress_tb1_P2WPKH(self):
-            self.pubaddrtb1_P2WPKH = self.instance._generate_publicaddress_bech32_P2WPKH(Address.TestNet.BECH32_PREFIX)
+            self.pubaddrtb1_P2WPKH = self.instance._generate_publicaddress_bech32_P2WPKH(Address.TestNet.BECH32_PREFIX, 
+                                                                                         Address.TestNet.PREFIX_B)
 
         def generate_publicaddress_tb1_P2WSH(self):
             self.pubaddrtb1_P2WSH = self.instance._generate_publicaddress_bech32_P2WSH(Address.TestNet.BECH32_PREFIX)
@@ -122,14 +124,17 @@ class Address:
         c = checksum(m)
         return base58.b58encode(m + c).decode('utf-8')
 
-    def _generate_publicaddress_bech32_P2WPKH(self, bech32_prefix):
-        p = self._generate_compressed_pubkey()
+    def _generate_publicaddress_bech32_P2WPKH(self, bech32_prefix, prefix_b):
+        p = self._generate_uncompressed_pubkey(prefix_b)
         redeem_script_P2WPKH = hash160(p).digest()  # 20 bytes
         return str(segwit_addr.encode(bech32_prefix, Address.WITNESS_VERSION, redeem_script_P2WPKH))
 
     def _generate_publicaddress_bech32_P2WSH(self, bech32_prefix):
         p = self._generate_compressed_pubkey()
-        redeem_script_P2WSH = hashlib.sha256(p).digest()
+        pr1 = bytes.fromhex('21')
+        po1 = bytes.fromhex('ac')
+        p_red = pr1 + p + po1
+        redeem_script_P2WSH = hashlib.sha256(p_red).digest()
         return str(segwit_addr.encode(bech32_prefix, Address.WITNESS_VERSION, redeem_script_P2WSH))
 
     def _generate_uncompressed_pubkey(self, prefix):
